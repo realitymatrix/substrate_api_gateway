@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   id="svg5"
+   version="1.1"
+   viewBox="0 0 1000 1000"
+   height="1000"
+   width="1000"
+   sodipodi:docname="substrate_logo_1"
+   inkscape:export-filename="substrate_logo_1.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.73917725"
+     inkscape:cx="482.96941"
+     inkscape:cy="376.77025"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <sodipodi:guide
+       position="0,950"
+       orientation="0,1000"
+       id="ink-font-guide-ascender"
+       inkscape:label="ascender"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,800"
+       orientation="0,1000"
+       id="ink-font-guide-caps"
+       inkscape:label="caps"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,600"
+       orientation="0,1000"
+       id="ink-font-guide-x-height"
+       inkscape:label="x-height"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,200"
+       orientation="0,1000"
+       id="ink-font-guide-baseline"
+       inkscape:label="baseline"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,0"
+       orientation="0,1000"
+       id="ink-font-guide-descender"
+       inkscape:label="descender"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient12129">
+      <stop
+         style="stop-color:#0000ff;stop-opacity:1;"
+         offset="0.37750715"
+         id="stop12125" />
+      <stop
+         style="stop-color:#0000ff;stop-opacity:0;"
+         offset="1"
+         id="stop12127" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient12119">
+      <stop
+         style="stop-color:#0000ff;stop-opacity:1;"
+         offset="0"
+         id="stop12115" />
+      <stop
+         style="stop-color:#0000ff;stop-opacity:0;"
+         offset="1"
+         id="stop12117" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient12089">
+      <stop
+         style="stop-color:#0000ff;stop-opacity:1;"
+         offset="0"
+         id="stop12085" />
+      <stop
+         style="stop-color:#0000ff;stop-opacity:0;"
+         offset="1"
+         id="stop12087" />
+    </linearGradient>
+    <font
+       horiz-adv-x="560"
+       id="font169"
+       inkscape:label="font 1"
+       horiz-origin-x="0"
+       horiz-origin-y="0"
+       vert-origin-x="512"
+       vert-origin-y="768"
+       vert-adv-y="1024">
+      <font-face
+         units-per-em="1000"
+         ascent="750"
+         cap-height="600"
+         x-height="400"
+         descent="200"
+         id="font-face171"
+         font-family="SVGFont 1" />
+      <missing-glyph
+         d="M0,0h1000v1000h-1000z"
+         id="missing-glyph173" />
+    </font>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient12089"
+       id="linearGradient12091"
+       x1="150.33073"
+       y1="234.57442"
+       x2="267.31406"
+       y2="234.57442"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(4.0602318,0,0,4.0602319,-122.269,-450.1089)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient12129"
+       id="linearGradient12131"
+       x1="15.643497"
+       y1="204.39925"
+       x2="287.20599"
+       y2="204.39925"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(4.0602318,0,0,4.0602319,-45.17826,-433.7854)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient12119"
+       id="linearGradient12135"
+       gradientUnits="userSpaceOnUse"
+       x1="150.15897"
+       y1="168.81667"
+       x2="241.78539"
+       y2="168.81667"
+       gradientTransform="matrix(4.0602318,0,0,4.0602319,-116.35626,-344.26565)" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:154.695px;writing-mode:lr-tb;fill:url(#linearGradient12135);fill-opacity:1;stroke:#000080;stroke-width:1.0742;stroke-dasharray:none;stroke-opacity:1"
+       x="480.56696"
+       y="389.73792"
+       id="text113"
+       transform="scale(0.94285463,1.0606089)"><tspan
+         sodipodi:role="line"
+         style="font-size:154.695px;writing-mode:lr-tb;fill:url(#linearGradient12135);fill-opacity:1;stroke:#000080;stroke-width:1.0742;stroke-dasharray:none;stroke-opacity:1"
+         x="480.56696"
+         y="389.73792"
+         id="tspan165">[sub]</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:584.673px;writing-mode:lr-tb;fill:url(#linearGradient12131);fill-opacity:1;stroke:#000080;stroke-width:4.06023"
+       x="-29.877291"
+       y="579.68988"
+       id="text187"
+       transform="scale(0.94285463,1.0606089)"><tspan
+         sodipodi:role="line"
+         id="tspan185"
+         x="-29.877291"
+         y="579.68988"
+         style="fill:url(#linearGradient12131);fill-opacity:1;stroke-width:4.06023">[s  </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:292.337px;font-family:NTR;-inkscape-font-specification:'NTR, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;fill:url(#linearGradient12091);fill-opacity:1;stroke:#000080;stroke-width:1.0742;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       x="483.22159"
+       y="576.82922"
+       id="text12083"
+       transform="scale(0.94285463,1.0606089)"><tspan
+         sodipodi:role="line"
+         id="tspan12081"
+         x="483.22159"
+         y="576.82922"
+         style="font-size:292.337px;fill:url(#linearGradient12091);fill-opacity:1;stroke:#000080;stroke-width:1.0742">trate</tspan></text>
+  </g>
+</svg>

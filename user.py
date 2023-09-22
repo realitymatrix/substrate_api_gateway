@@ -10,6 +10,7 @@ class User:
     self.passwd = passwd
     self.access_T = accessToken
     self.refresh_T = refreshToken
+    self.commands = []
 
 
 def serializeUser(usr: User):
@@ -19,3 +20,6 @@ def serializeUser(usr: User):
     'access_T': usr.access_T,
     'refresh_T': usr.refresh_T,
   }
+
+def getUserCommands(usr: User):
+  return usr.commands

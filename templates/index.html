@@ -4,6 +4,7 @@
     <title>
         [substrate api gateway]
     </title>
+    <link rel="icon" type="image/x-icon" href="static/scalable_substrate.svg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <!-- HTMX -->
@@ -15,34 +16,81 @@
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
-            width: 100%;
+            width:auto;
         }
-
         tr.htmx-swapping td {
             opacity: 0;
             transition: opacity 0.5s ease-out;
         }
-
         td, th {
             border: 1px solid #383737;
             text-align: left;
             padding: 8px;
         }
-
         tr:nth-child(even) {
             background-color: #dddddd;
         }
+        body {
+            animation: fadeInAnimation ease 1s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+        img {
+            animation: fadeInAnimation ease 10s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        :root{
+            --blue-color: #2551ec;
+        }
+        #right_bracket {
+                fill: var(--blue-color)
+            }
+        #left_bracket {
+            fill: var(--blue-color)
+        }
+        #right_bracket,
+        #left_bracket {
+            transition: all 1s ease
+        }
+        svg:hover #right_bracket {
+            transform: translateX(15%);
+        }
+        svg:hover #left_bracket {
+            transform: translateX(-15%);
+        }
     </style>
+        <svg width="250" height="150" viewBox="0 0 1000 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="brackets">
+            <rect width="500" height="500" fill="white"/>
+            <g id="right_bracket" opacity="0.8">
+            <rect id="Rectangle 1" x="98" width="200" height="40"/>
+            <rect id="Rectangle 2" x="258" y="40" width="40" height="312"/>
+            <rect id="Rectangle 3" x="98" y="352" width="200" height="40"/>
+            </g>
+            <g id="left_bracket" opacity="0.8">
+            <rect id="Rectangle 1_2" width="200" height="40" transform="matrix(-1 0 0 1 410 108)"/>
+            <rect id="Rectangle 2_2" width="40" height="312" transform="matrix(-1 0 0 1 250 148)"/>
+            <rect id="Rectangle 3_2" width="200" height="40" transform="matrix(-1 0 0 1 410 460)"/>
+            </g>
+            </g>
+        </svg>
 </head>
 
 <!-- Place <body> </body> code here -->
 <body>
-    <h1>[substrate] API Gateway</h1>
-    <h2>
-        <textarea hidden="true" title="Codeblock">
-            Your code here
-        </textarea>
-    </h2>
+    <h1 style="color:rgb(56, 43, 245);">
+        API
+        <img src="static/scalable_substrate.svg" height="100" width="200"></img>
+    </h1>
     <form hx-post="/submit" hx-swap="beforeend" hx-target="#new-user" class="mb-3">
         <input type="text" placeholder="User Name" name="email" class="form-control mb-3" />
         <input type="text" placeholder="Password" name="password" class="form-control mb-3" />
@@ -56,20 +104,25 @@
           <tr>
             <th scope="col">User E-mail</th>
             <th scope="col">User ID</th>
+            <th scope="col">Actions</th>
+            <th scope="col">Add Commands</th>
           </tr>
         </thead>
-        <tbody id="new-user" hx-target="closest tr" hx-swap="outerHTML swap:0.5s"> 
+        <tbody id="new-user" hx-target="closest tr" hx-swap="outerHTML swap:0.1s"> 
             {%for user in users%}
             <tr>
-                <td>{{ user.email }}</td>
-                <td>{{ user.id }}</td>
-                <td>
-                    <button hx-delete="/delete/{{ user.id }}" class="btn btn-primary">Delete User</button>
+                <td width="15%">{{ user.email }}</td>
+                <td width="5%">{{ user.id }}</td>
+                <td width="10%">
+                    <button hx-delete="/delete/{{ user.id }}" class="btn btn-primary">
+                        Delete User
+                    </button>
                 </td>
             </tr>
             {%endfor%}
         </tbody>
     </table>
+    <img class="img" src="static/logo.png" height="150px"></img>
 </body>
 
 </html>

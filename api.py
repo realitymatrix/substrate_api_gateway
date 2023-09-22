@@ -55,3 +55,20 @@ def authenticateUser(email: str, passwd: str):
         'access': auth_res.json()["accessToken"], 
         'refresh': auth_res.json()["refreshToken"] 
         }
+
+def createCommand(user: User, command: str, type: str):
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f'Bearer {user.access_T}'
+    }
+    body = {
+            'command': command,
+            'userId': user.id,
+            'type': type
+    }
+    command_res = requests.post(
+        headers=headers,
+        url=f'http://localhost:3333/commandString',
+        data=dumps(body)
+    )
+    assert command_res.status_code == 201

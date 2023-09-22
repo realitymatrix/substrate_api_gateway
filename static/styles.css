@@ -2,16 +2,9 @@
 
 /* Your CSS file */
 
-
-.smooth {
-  transition: all 5s ease-in;
-  color: blue;
-}
-
-.smooth_button {
-    transition: all 1s ease-in;
-    width: 100px;
-    height: 50px;
-    color: blue;
-    background-image: "static/loading.gif";
-}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }

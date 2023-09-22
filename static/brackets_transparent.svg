@@ -1,0 +1,15 @@
+<svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="brackets">
+<rect width="500" height="500" fill="white"/>
+<g id="right_bracket" opacity="0.8">
+<rect id="Rectangle 1" x="98" width="200" height="40" fill="#2551EC"/>
+<rect id="Rectangle 2" x="258" y="40" width="40" height="312" fill="#2551EC"/>
+<rect id="Rectangle 3" x="98" y="352" width="200" height="40" fill="#2551EC"/>
+</g>
+<g id="left_bracket" opacity="0.8">
+<rect id="Rectangle 1_2" width="200" height="40" transform="matrix(-1 0 0 1 410 108)" fill="#2551EC"/>
+<rect id="Rectangle 2_2" width="40" height="312" transform="matrix(-1 0 0 1 250 148)" fill="#2551EC"/>
+<rect id="Rectangle 3_2" width="200" height="40" transform="matrix(-1 0 0 1 410 460)" fill="#2551EC"/>
+</g>
+</g>
+</svg>
