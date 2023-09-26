@@ -1,12 +1,16 @@
 # app.py
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, Request
+from htmx_components_flask import htmx_components_flask
+from flask_wtf import FlaskForm
 import requests
+import json
+from wtforms import Form
 from json import dumps
 from nanoid import generate
 from user import User, serializeUser
-from api import createUser, deleteUser, createCommand
-from generative import new_user_row, new_command_row
+from api import createUser, deleteUser, createCommand, deleteCommand, runCommand
+from generative import new_user_row, new_command_row, new_registration, command_response
 
 ZENCODE_REST = "http://localhost:3333"
 USERS_API = '/users'
@@ -15,10 +19,14 @@ users = []
 
 app = Flask(__name__)
 
+@app.route("/index", methods=["GET"])
 @app.route("/", methods=["GET"])
 def code():
     return render_template("index.html", users=users)
 
+@app.route("/register", methods=["GET"])
+def register():
+    return new_registration()
 
 @app.route("/submit", methods=["POST"])
 def submit():
@@ -35,19 +43,36 @@ def delete(id: str):
     users.remove(usr)
     return ""
 
+@app.route("/command/delete/<string:command_id>", methods=["DELETE"])
+def command_delete(command_id: str):
+    usr = json.loads(request.form["user"])
+    deleteCommand(command_id, usr)
+    return ""
+
 @app.route("/command/<string:user_id>", methods=["POST"])
 def command(user_id: str):
     usr = getUserById(user_id)
-    print(user_id)
+    print(request.form)
+    type = request.form["typec"]
+    command = request.form["command"]
+    command_id = createCommand(usr, command, type)
+    return new_command_row(command, type, command_id, usr)
 
-    # type = request.form['command_type']
-    command = request.form['command_text']
-    
-    print(type, command)
+@app.route("/command_type", methods=["POST"])
+def command_type():
+    type = request.form["typec"]
+    return f"""
+            <button id="add" hx-post="/command/{id}" hx-target="#user_row" hx-swap="afterend" class="btn btn-primary">
+                {type.upper()}
+            </button>
+    """
 
-    # command_id = createCommand(usr['id'], command, type)
-    print(usr)
-    return new_user_row(usr['email'], usr['id']) + new_command_row(command, type)
+@app.route("/execute/<string:command_id>", methods=["POST"])
+def execute(command_id: str):
+    print(command_id)
+    usr = json.loads(request.form["user"])
+    result = runCommand(command_id, usr)
+    return command_response(json.dumps(result, indent=4, sort_keys=True))
 
 
 def getUserById(id: str):

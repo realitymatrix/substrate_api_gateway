@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   id="svg5"
+   version="1.1"
+   viewBox="0 0 1869.3303 514.49994"
+   height="514.49994"
+   width="1869.3303"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2">
+    <font
+       horiz-adv-x="560"
+       id="font169"
+       horiz-origin-x="0"
+       horiz-origin-y="0"
+       vert-origin-x="512"
+       vert-origin-y="768"
+       vert-adv-y="1024">
+      <font-face
+         units-per-em="1000"
+         ascent="750"
+         cap-height="600"
+         x-height="400"
+         descent="200"
+         id="font-face171"
+         font-family="SVGFont 1" />
+      <missing-glyph
+         d="M0,0h1000v1000h-1000z"
+         id="missing-glyph173" />
+    </font>
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-13.536626,-177.83015)">
+    <text
+       xml:space="preserve"
+       style="font-size:154.695px;writing-mode:lr-tb;fill:#3c46d4;fill-opacity:1;stroke:#000080;stroke-width:1.0742;stroke-dasharray:none;stroke-opacity:1"
+       x="480.56696"
+       y="389.73792"
+       id="text113"
+       transform="scale(0.94285463,1.0606089)"><tspan
+         style="font-size:154.695px;writing-mode:lr-tb;fill:#3c46d4;fill-opacity:1;stroke:#000080;stroke-width:1.0742;stroke-dasharray:none;stroke-opacity:1"
+         x="480.56696"
+         y="389.73792"
+         id="tspan165">[sub]</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:584.673px;writing-mode:lr-tb;fill:#3c46d4;fill-opacity:1;stroke:#000080;stroke-width:4.06023"
+       x="-29.877291"
+       y="579.68988"
+       id="text187"
+       transform="scale(0.94285463,1.0606089)"><tspan
+         id="tspan185"
+         x="-29.877291"
+         y="579.68988"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:539.782px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#3c46d4;fill-opacity:1;stroke-width:4.06023">[s   API]</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:292.337px;font-family:NTR;-inkscape-font-specification:'NTR, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;fill:#3c46d4;fill-opacity:1;stroke:#000080;stroke-width:1.0742;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       x="483.22159"
+       y="576.82922"
+       id="text12083"
+       transform="scale(0.94285463,1.0606089)"><tspan
+         id="tspan12081"
+         x="483.22159"
+         y="576.82922"
+         style="font-size:292.337px;fill:#3c46d4;fill-opacity:1;stroke:#000080;stroke-width:1.0742">trate</tspan></text>
+  </g>
+</svg>
