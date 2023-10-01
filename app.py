@@ -1,11 +1,9 @@
 # app.py
 
 from flask import Flask, render_template, request, jsonify, Request
-from htmx_components_flask import htmx_components_flask
 from flask_wtf import FlaskForm
 import requests
 import json
-from wtforms import Form
 from json import dumps
 from nanoid import generate
 from user import User, serializeUser
