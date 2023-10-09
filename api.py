@@ -104,7 +104,9 @@ def runCommand(command_id: str, user: str):
         data=dumps(body),
         url='http://localhost:3333/commands/runCommand'
     )
-    assert run_res.ok
+    if not run_res.ok:
+        return f'status: {run_res.status_code} ' + f'There was an internal error. {run_res.text}'
+    
     response = run_res.json()
     print(response['result']['data'])
     return response['result']['data']
