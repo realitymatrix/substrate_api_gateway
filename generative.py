@@ -143,7 +143,7 @@ def close_websocket_connection(kernel_id: str):
                     hx-target="#ws_textarea"
                     hx-include="closest form"
                     hx-swap="afterend"
-                    class="btn btn-primary">
+                    class="btn btn-primary btn-align">
                 Send
             </button>
             <button id="disconnect_websocket" 
@@ -152,12 +152,13 @@ def close_websocket_connection(kernel_id: str):
                     hx-include="closest form"
                     hx-swap="outerHTML"
                     hx-vals='{{ "kernel_id": {kernel_id} }}'
-                    class="btn btn-primary">
+                    class="btn btn-primary btn-align">
                 Close Websocket
             </button>
-            <button hx-target="#ws-response" 
-                    hx-swap="delete" 
-                    class="btn btn-primary">Clear Messages</button>
+            <button hx-target="#ws-response"
+                    hx-delete="/clear"
+                    hx-swap="outerHTML" 
+                    class="btn btn-primary btn-align">Clear Messages</button>
         </td>
     """
 
@@ -165,8 +166,6 @@ def write_response(ws_response: str):
     lines = ws_response.split('\n')
     max_cols = max([len(line) for line in lines])
     newlines = ws_response.count('\n') + 1
-    print(max_cols)
-    print(newlines)
     return f"""
     <textarea class="code"
               id="ws-response"

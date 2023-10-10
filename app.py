@@ -105,6 +105,10 @@ def websocket_close(kernel_id: str):
     del client
     return open_websocket_connection(kernel_id)
 
+@app.route("/clear", methods=["DELETE"])
+def clear():
+    return ''
+
 def getUserById(id: str):
     for user in users:
         if user['id'] == id:

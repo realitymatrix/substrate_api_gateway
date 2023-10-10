@@ -9,6 +9,10 @@ from threading import Thread
 from uuid import uuid4
 from tornado.escape import json_decode, json_encode, utf8
 
+API_PROTOCOL = 'http'
+API_HOST = 'localhost'
+API_PORT = '3333'
+API_URL = f'{API_PROTOCOL}://{API_HOST}:{API_PORT}'
 REQUEST_TIMEOUT = int(os.getenv("REQUEST_TIMEOUT", 120))
 
 # websocket.enableTrace(True)
@@ -298,7 +302,7 @@ def createKernel(user: str):
     run_res = requests.post(
         headers=headers,
         data=dumps(body),
-        url='http://localhost:3333/commands/runCommand'
+        url=f'{API_URL}/commands/runCommand'
     )
     if not run_res.ok:
         return f'status: {run_res.status_code} ' + f'There was an internal error. {run_res.text}'

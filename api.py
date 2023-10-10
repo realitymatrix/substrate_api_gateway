@@ -2,6 +2,11 @@ from json import dumps
 import requests
 from user import User
 
+API_PROTOCOL = 'http'
+API_HOST = 'localhost'
+API_PORT = '3333'
+API_URL = f'{API_PROTOCOL}://{API_HOST}:{API_PORT}'
+
 def createUser(email: str, passwd: str):
     headers = {
         "Content-Type": "application/json"
@@ -12,7 +17,7 @@ def createUser(email: str, passwd: str):
     }
     reg_res = requests.post(
         headers=headers,
-        url='http://localhost:3333/users',
+        url=f'{API_URL}/users',
         data=dumps(body)
     )
     assert reg_res.status_code == 201
@@ -33,7 +38,7 @@ def deleteUser(user: str):
     }
     del_res = requests.delete(
         headers=headers,
-        url=f'http://localhost:3333/users/{user["id"]}'
+        url=f'{API_URL}/users/{user["id"]}'
     )
     assert del_res.status_code == 204
 
@@ -47,7 +52,7 @@ def authenticateUser(email: str, passwd: str):
     }
     auth_res = requests.post(
         headers=headers,
-        url=f'http://localhost:3333/auth',
+        url=f'{API_URL}/auth',
         data=dumps(body)
     )
     assert auth_res.status_code == 201
@@ -68,7 +73,7 @@ def createCommand(user: str, command: str, type: str):
     }
     command_res = requests.post(
         headers=headers,
-        url=f'http://localhost:3333/commands/commandString',
+        url=f'{API_URL}/commands/commandString',
         data=dumps(body)
     )
     assert command_res.status_code == 201
@@ -86,7 +91,7 @@ def deleteCommand(command_id: str, user: str):
     del_res = requests.delete(
         headers=headers,
         data=dumps(body),
-        url=f'http://localhost:3333/commands/commandId'
+        url=f'{API_URL}/commands/commandId'
     )
     assert del_res.status_code == 200
 
@@ -102,7 +107,7 @@ def runCommand(command_id: str, user: str):
     run_res = requests.post(
         headers=headers,
         data=dumps(body),
-        url='http://localhost:3333/commands/runCommand'
+        url=f'{API_URL}/commands/runCommand'
     )
     if not run_res.ok:
         return f'status: {run_res.status_code} ' + f'There was an internal error. {run_res.text}'
