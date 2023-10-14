@@ -113,5 +113,5 @@ def runCommand(command_id: str, user: str):
         return f'status: {run_res.status_code} ' + f'There was an internal error. {run_res.text}'
     
     response = run_res.json()
-    print(response['result']['data'])
+    # print(response['result']['data'])
     return response['result']['data']

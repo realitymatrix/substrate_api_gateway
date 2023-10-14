@@ -4,12 +4,13 @@ from flask import Flask, render_template, request, jsonify, Request, current_app
 from flask_wtf import FlaskForm
 import requests
 import json
+from bs4 import BeautifulSoup
 from json import dumps
 from nanoid import generate
 from user import User, serializeUser
 from api import createUser, deleteUser, createCommand, deleteCommand, runCommand
 from generative import (new_user_row, new_command_row, new_registration, command_response, 
-                        open_websocket_connection, close_websocket_connection, write_response)
+                        open_websocket_connection, new_websocket_connection, write_response)
 from kernel_service import createKernel, createWebsocket
 
 ZENCODE_REST = "http://localhost:3333"
@@ -72,20 +73,23 @@ def execute(command_id: str):
     print(command_id)
     usr = json.loads(request.form["user"])
     result = runCommand(command_id, usr)
+    if not isinstance(result, dict) and result[0:15] == '<!DOCTYPE HTML>':
+        result = BeautifulSoup(result, "html.parser").find(class_='error').findChild('h1').text
     return command_response(json.dumps(result, indent=4, sort_keys=True))
 
 @app.route("/kernel", methods=["POST"])
 def kernel():
     usr = json.loads(request.form["user"])
     kernel_id = createKernel(usr)
-    return open_websocket_connection(kernel_id)
+    return open_websocket_connection(kernel_id, usr)
 
 @app.route("/websocket/open/<string:kernel_id>", methods=["POST"])
 def websocket_open(kernel_id: str):
-    print(f'Connection with {kernel_id} initiated')
+    usr = json.loads(request.form["user"])
+    print(f'Connection with kernel {kernel_id} initiated by user {usr["id"]}')
     global client
     client = createWebsocket(kernel_id)
-    return close_websocket_connection(kernel_id)
+    return new_websocket_connection(kernel_id, usr)
 
 @app.route("/websocket/run/<string:kernel_id>", methods=["POST"])
 def websocket_run(kernel_id: str):
@@ -96,14 +100,16 @@ def websocket_run(kernel_id: str):
         print(f'Received response: {res[0].strip()}')
         return write_response(res[0].strip())
     else:
-        return 'Code Error'
+        return write_response('Code Error')
 
 @app.route("/websocket/close/<string:kernel_id>", methods=["DELETE"])
 def websocket_close(kernel_id: str):
     global client
     client.shutdown()
     del client
-    return open_websocket_connection(kernel_id)
+    usr = json.loads(request.form["user"])
+    kernel_id = createKernel(usr)
+    return open_websocket_connection(kernel_id, usr)
 
 @app.route("/clear", methods=["DELETE"])
 def clear():

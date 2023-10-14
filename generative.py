@@ -45,12 +45,35 @@ def new_user_row(usr: User):
                         <option value="patch">PATCH</option>
                         <option value="delete">DELETE</option>
                     </select>
+                    <script>
+                        HTMLTextAreaElement.prototype.setCaretPosition = function (position) {{
+                            this.selectionStart = position;
+                            this.selectionEnd = position;
+                            this.focus();
+                        }};
+                    </script>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
                     <textarea
                         id="command"
                         name="command" 
                         type="text" 
                         placeholder="Command"
-                        class="form-control mb-3"></textarea>
+                        spellcheck="false"
+                        hx-on:keydown="
+                            var textarea = this; 
+                            if (event.keyCode == 9) {{
+                                    event.preventDefault();
+                                    var newCaretPosition;
+                                    newCaretPosition = textarea.selectionStart + '    '.length;
+                                    textarea.value = textarea.value.substring(0, textarea.selectionStart) + '    ' + textarea.value.substring(textarea.selectionStart, textarea.value.length);
+                                    textarea.setCaretPosition(newCaretPosition);
+                                    return false;
+                                }}"
+                        onkeydown="this.focus();"
+                        class="code"></textarea>
             </td>
             <td>
                 <button id="add" 
@@ -84,7 +107,7 @@ def new_command_row(command: str, type: str, command_id: str, usr: str):
         <form>
             <td width="wrap">
                 <label>{type.upper()}</label>
-                <textarea type="text" readonly name="command_text" class="form-control mb-3">{command}</textarea>
+                <textarea type="text" readonly name="command_text" class="code">{command}</textarea>
             </td>
             <td>{command_id}</td>
             <td>
@@ -121,23 +144,46 @@ def command_response(response_text: str):
     </td>
 """
 
-def open_websocket_connection(kernel_id: str):
+def open_websocket_connection(kernel_id: str, usr: str):
+    usr = dumps(usr)
     return f"""
         <td id="connect_websocket">
             <button hx-post="/websocket/open/{kernel_id}"
                     hx-target="#connect_websocket"
                     hx-swap="outerHTML"
+                    hx-include="this"
+                    hx-vals='{{ "user": {usr} }}'
                     class="btn btn-primary">
                 Open Websocket
             </button>
         </td>
     """
 
-def close_websocket_connection(kernel_id: str):
+def new_websocket_connection(kernel_id: str, usr: str):
+    usr = dumps(usr)
     return f"""
         <td>
             <form>
-                <textarea id="ws_textarea" wrap="soft" cols="25" rows="2" name="ws_text" type="text" name="command_ws" class="code"></textarea>
+                <textarea id="ws_textarea" 
+                          wrap="soft" 
+                          cols="25" 
+                          rows="2" 
+                          name="ws_text" 
+                          type="text" 
+                          name="command_ws" 
+                          hx-on:keydown="
+                            var textarea = this; 
+                            if (event.keyCode == 9) {{
+                                    event.preventDefault();
+                                    var newCaretPosition;
+                                    newCaretPosition = textarea.selectionStart + '    '.length;
+                                    textarea.value = textarea.value.substring(0, textarea.selectionStart) + '    ' + textarea.value.substring(textarea.selectionStart, textarea.value.length);
+                                    textarea.setCaretPosition(newCaretPosition);
+                                    return false;
+                                }}"
+                          onkeydown="this.focus();"
+                          placeholder="Python Code"
+                          class="code"></textarea>
             <form>
             <button hx-post="/websocket/run/{kernel_id}"
                     hx-target="#ws_textarea"
@@ -151,7 +197,7 @@ def close_websocket_connection(kernel_id: str):
                     hx-target="closest td"
                     hx-include="closest form"
                     hx-swap="outerHTML"
-                    hx-vals='{{ "kernel_id": {kernel_id} }}'
+                    hx-vals='{{ "user": {usr} }}'
                     class="btn btn-primary btn-align">
                 Close Websocket
             </button>

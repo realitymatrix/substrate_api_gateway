@@ -4,6 +4,7 @@
     <title>
         [substrate api gateway]
     </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/styles.css') }}"/>
     <link rel="icon" type="image/x-icon" href="static/scalable_substrate.svg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -17,7 +18,8 @@
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
-            width:auto;
+            /* width:auto; */
+            /* width: 100%; */
         }
         tr.htmx-swapping td {
             opacity: 0;
@@ -27,7 +29,7 @@
             border: 1px solid #383737;
             text-align: left;
             padding: 8px;
-            flex-direction: column;
+            /* flex-direction: column; */
         }
         tr:nth-child(even) {
             background-color: #dddddd;
@@ -118,12 +120,13 @@
             padding: 1em 2em;
             min-width: 10em;
             max-width: 100%;
-            min-height: 3em;
+            min-height: 60px;
             text-align: left;
             border: 1px solid #cecece;
             margin: 1em;
             line-height: 1.4em;
             display: block;
+            resize: both;
         }
         .btn-align {
             display: block;
