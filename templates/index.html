@@ -11,6 +11,30 @@
     <!-- HTMX -->
     <script src="https://unpkg.com/htmx.org@1.9.5"></script>
     <script src="https://unpkg.com/hyperscript.org@0.9.11"></script>
+    <script>
+        HTMLTextAreaElement.prototype.setCaretPosition = function (position) {
+            this.selectionStart = position;
+            this.selectionEnd = position;
+            this.focus();
+        };
+        registerKeystroke = function (event, textarea) {  
+            if (event.keyCode == 9) {
+                if (event.shiftKey) {
+                    event.preventDefault();
+                    var newCaretPosition;
+                    newCaretPosition = textarea.selectionStart - '    '.length;
+                    textarea.setCaretPosition(newCaretPosition);
+                    return false;
+                }
+                event.preventDefault();
+                var newCaretPosition;
+                newCaretPosition = textarea.selectionStart + '    '.length;
+                textarea.value = textarea.value.substring(0, textarea.selectionStart) + '    ' + textarea.value.substring(textarea.selectionStart, textarea.value.length);
+                textarea.setCaretPosition(newCaretPosition);
+                return false;
+            }
+        };
+    </script>
     <style>
         body{
             padding: 20px;

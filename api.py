@@ -95,15 +95,22 @@ def deleteCommand(command_id: str, user: str):
     )
     assert del_res.status_code == 200
 
-def runCommand(command_id: str, user: str):
+def runCommand(command_id: str, user: str, data: str):
     headers = {
         "Content-Type": "application/json",
         "Authorization": f'Bearer {user["access_T"]}'
     }
-    body = {
-        'commandId': command_id,
-        'userId': user['id']
-    }
+    if data:
+        body = {
+            'commandId': command_id,
+            'userId': user['id'],
+            'data': data
+        }
+    else:
+        body = {
+            'commandId': command_id,
+            'userId': user['id']
+        }
     run_res = requests.post(
         headers=headers,
         data=dumps(body),

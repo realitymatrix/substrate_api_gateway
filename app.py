@@ -53,11 +53,11 @@ def command_delete(command_id: str):
 @app.route("/command/<string:user_id>", methods=["POST"])
 def command(user_id: str):
     usr = getUserById(user_id)
-    print(request.form)
     type = request.form["typec"]
     command = request.form["command"]
+    data = request.form["command_data"]
     command_id = createCommand(usr, command, type)
-    return new_command_row(command, type, command_id, usr)
+    return new_command_row(command, type, command_id, usr, data)
 
 @app.route("/command_type", methods=["POST"])
 def command_type():
@@ -71,8 +71,13 @@ def command_type():
 @app.route("/execute/<string:command_id>", methods=["POST"])
 def execute(command_id: str):
     print(command_id)
+    print(request.form)
     usr = json.loads(request.form["user"])
-    result = runCommand(command_id, usr)
+    data = None
+    # print(data)
+    if not data:
+        data = None
+    result = runCommand(command_id, usr, data)
     if not isinstance(result, dict) and result[0:15] == '<!DOCTYPE HTML>':
         result = BeautifulSoup(result, "html.parser").find(class_='error').findChild('h1').text
     return command_response(json.dumps(result, indent=4, sort_keys=True))

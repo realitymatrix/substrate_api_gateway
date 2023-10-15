@@ -28,52 +28,51 @@ def new_user_row(usr: User):
             <td>{usr.id}</td>
             <td>
                 <button hx-delete="/delete/{usr.id}"
-                    class="btn btn-primary">
+                    class="btn btn-danger">
                     Delete User
                 </button>
             </td>
             <td width="wrap">
-                    Command
-                    <label>Type</label>
-                    <select 
-                            name="typec" 
-                            hx-target="#add"
-                            hx-indicator=".htmx-indicator">
-                        <option value="get">GET</option>
-                        <option value="post">POST</option>
-                        <option value="put">PUT</option>
-                        <option value="patch">PATCH</option>
-                        <option value="delete">DELETE</option>
-                    </select>
-                    <script>
-                        HTMLTextAreaElement.prototype.setCaretPosition = function (position) {{
-                            this.selectionStart = position;
-                            this.selectionEnd = position;
-                            this.focus();
-                        }};
-                    </script>
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                    <textarea
-                        id="command"
-                        name="command" 
-                        type="text" 
-                        placeholder="Command"
-                        spellcheck="false"
-                        hx-on:keydown="
-                            var textarea = this; 
-                            if (event.keyCode == 9) {{
-                                    event.preventDefault();
-                                    var newCaretPosition;
-                                    newCaretPosition = textarea.selectionStart + '    '.length;
-                                    textarea.value = textarea.value.substring(0, textarea.selectionStart) + '    ' + textarea.value.substring(textarea.selectionStart, textarea.value.length);
-                                    textarea.setCaretPosition(newCaretPosition);
-                                    return false;
-                                }}"
-                        onkeydown="this.focus();"
-                        class="code"></textarea>
+                <p _="on dragstart call event.dataTransfer.setData('text/plain',target.textContent)">
+                    <button class="badge rounded-pill pill-background bg-primary" draggable="true" value="get">GET</button>
+                    <button class="badge rounded-pill bg-primary" draggable="true" value="post">POST</button>
+                    <button class="badge rounded-pill bg-primary" draggable="true" value="put">PUT</button>
+                    <button class="badge rounded-pill bg-primary" draggable="true" value="patch">PATCH</button>
+                    <button class="badge rounded-pill bg-primary" draggable="true" value="delete">DELETE</button>
+                </p>
+                <select class="rounded-pill pill-position"
+                        name="typec" 
+                        hx-target="#add"
+                        hx-indicator=".htmx-indicator">
+                    <option value="get">GET</option>
+                    <option value="post">POST</option>
+                    <option value="put">PUT</option>
+                    <option value="patch">PATCH</option>
+                    <option value="delete">DELETE</option>
+                </select>
+                <textarea
+                    id="command"
+                    name="command" 
+                    type="text" 
+                    placeholder="Command"
+                    spellcheck="false"
+                    _=" on dragover or dragenter halt the event
+                            then set the target's style.background to 'lightblue'
+                        on dragleave or drop set the target's style.background to ''
+                        on drop get event.dataTransfer.getData('text/plain')
+                            then put it into the next <select/>"
+                    hx-on:keydown="registerKeystroke(event, this)"
+                    onkeydown="this.focus();"
+                    class="code"></textarea>
+                <textarea
+                    id="command_data"
+                    name="command_data" 
+                    type="text" 
+                    placeholder="Data"
+                    spellcheck="false"
+                    hx-on:keydown="registerKeystroke(event, this)"
+                    onkeydown="this.focus();"
+                    class="code"></textarea>
             </td>
             <td>
                 <button id="add" 
@@ -100,19 +99,28 @@ def new_user_row(usr: User):
     </tr>
         """
 
-def new_command_row(command: str, type: str, command_id: str, usr: str):
+def new_command_row(command: str, type: str, command_id: str, usr: str, data: str):
     usr = dumps(usr)
+
+    if len(data.strip('\"')) > 0:
+        validated_data = data
+        data_row = f'<textarea type="text" readonly name="data_text" class="code">{data}</textarea>'
+    else:
+        data_row = ''
+        validated_data = ''
     return f"""
     <tr id="command_row">
         <form>
             <td width="wrap">
                 <label>{type.upper()}</label>
                 <textarea type="text" readonly name="command_text" class="code">{command}</textarea>
+                {data_row}
             </td>
             <td>{command_id}</td>
             <td>
                 <button hx-post="/execute/{command_id}" 
                         hx-vals='{{ "user": {usr} }}'
+                        _="on click transition opacity to 0 then remove me"
                         hx-target="#result"
                         hx-swap="afterend" 
                         class="btn btn-primary">
@@ -131,10 +139,6 @@ def new_command_row(command: str, type: str, command_id: str, usr: str):
 """
 
 def command_response(response_text: str):
-    # formatter = HtmlFormatter(style='default')
-    # style_definitions = formatter.get_style_defs()
-    # style_bg_color = formatter.style.background_color
-    # highlighted_code = highlight(response_text, Python3Lexer(), formatter)
     lines = response_text.split('\n')
     max_cols = max([len(line) for line in lines])
     newlines = response_text.count('\n') + 1
@@ -153,7 +157,7 @@ def open_websocket_connection(kernel_id: str, usr: str):
                     hx-swap="outerHTML"
                     hx-include="this"
                     hx-vals='{{ "user": {usr} }}'
-                    class="btn btn-primary">
+                    class="btn btn-success">
                 Open Websocket
             </button>
         </td>
@@ -198,13 +202,13 @@ def new_websocket_connection(kernel_id: str, usr: str):
                     hx-include="closest form"
                     hx-swap="outerHTML"
                     hx-vals='{{ "user": {usr} }}'
-                    class="btn btn-primary btn-align">
+                    class="btn btn-danger btn-align">
                 Close Websocket
             </button>
             <button hx-target="#ws-response"
                     hx-delete="/clear"
                     hx-swap="outerHTML" 
-                    class="btn btn-primary btn-align">Clear Messages</button>
+                    class="btn btn-secondary btn-align">Clear Messages</button>
         </td>
     """
 
@@ -213,10 +217,12 @@ def write_response(ws_response: str):
     max_cols = max([len(line) for line in lines])
     newlines = ws_response.count('\n') + 1
     return f"""
-    <textarea class="code"
-              id="ws-response"
-              cols="{max_cols}"
-              rows={newlines}
-              readonly 
-              name="ws_res">{ws_response}</textarea>
+    <div id="ws-response">
+        <span class="badge rounded-pill bg-success pill-position">New</span>
+        <textarea class="code"
+                cols="{max_cols}"
+                rows={newlines}
+                readonly 
+                name="ws_res">{ws_response}</textarea>
+    </div>
 """
