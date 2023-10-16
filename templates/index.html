@@ -4,6 +4,7 @@
     <title>
         [substrate api gateway]
     </title>
+    <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/styles.css') }}"/>
     <link rel="icon" type="image/x-icon" href="static/scalable_substrate.svg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -11,6 +12,13 @@
     <!-- HTMX -->
     <script src="https://unpkg.com/htmx.org@1.9.5"></script>
     <script src="https://unpkg.com/hyperscript.org@0.9.11"></script>
+    <!-- Scripts -->
+    <script>
+        function selectElement(id, valueSelected) {  
+            let element = document.getElementById(id);  
+            element.value = valueSelected;
+        }
+    </script>
     <script>
         HTMLTextAreaElement.prototype.setCaretPosition = function (position) {
             this.selectionStart = position;
@@ -34,6 +42,26 @@
                 return false;
             }
         };
+    </script>
+    <script type="text/hyperscript">
+        behavior Draggable(dragHandle)
+        init
+            if no dragHandle set the dragHandle to me
+        end
+        on pointerdown(clientX, clientY) from dragHandle
+            halt the event
+            trigger draggable:start -- hooks, e.g. for adding a drop shadow while dragging
+            measure my x, y
+            set xoff to clientX - x
+            set yoff to clientY - y
+            repeat until event pointerup from document
+            wait for pointermove(pageX, pageY) or
+                    pointerup  (pageX, pageY) from document
+            add { left: ${pageX - xoff}px; top: ${pageY - yoff}px; }
+            trigger draggable:move
+            end
+            trigger draggable:end
+        end
     </script>
     <style>
         body{

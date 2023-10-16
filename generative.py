@@ -33,8 +33,8 @@ def new_user_row(usr: User):
                 </button>
             </td>
             <td width="wrap">
-                <p _="on dragstart call event.dataTransfer.setData('text/plain',target.textContent)">
-                    <button class="badge rounded-pill pill-background bg-primary" draggable="true" value="get">GET</button>
+                <p _="on dragstart call event.dataTransfer.setData('text/plain', target.value)">
+                    <button class="badge rounded-pill bg-primary" draggable="true" value="get">GET</button>
                     <button class="badge rounded-pill bg-primary" draggable="true" value="post">POST</button>
                     <button class="badge rounded-pill bg-primary" draggable="true" value="put">PUT</button>
                     <button class="badge rounded-pill bg-primary" draggable="true" value="patch">PATCH</button>
@@ -43,6 +43,7 @@ def new_user_row(usr: User):
                 <select class="rounded-pill pill-position"
                         name="typec" 
                         hx-target="#add"
+                        id="cmd-type-selection"
                         hx-indicator=".htmx-indicator">
                     <option value="get">GET</option>
                     <option value="post">POST</option>
@@ -60,7 +61,7 @@ def new_user_row(usr: User):
                             then set the target's style.background to 'lightblue'
                         on dragleave or drop set the target's style.background to ''
                         on drop get event.dataTransfer.getData('text/plain')
-                            then put it into the next <select/>"
+                            then call selectElement('cmd-type-selection', it)"
                     hx-on:keydown="registerKeystroke(event, this)"
                     onkeydown="this.focus();"
                     class="code"></textarea>
